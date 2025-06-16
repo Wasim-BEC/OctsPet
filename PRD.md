@@ -31,6 +31,9 @@ Create a simple, visually appealing landing page to promote a "Meetup" event for
 6. **Contact Section**
    - Email or contact form for questions
    - Social media links
+7. **Add Pet Profile**
+   - Users can add their pet's name, type, and photo (client-side only)
+   - Display added pet profiles on the page
 
 ## Technical Requirements
 - HTML, CSS, JavaScript only (no frameworks)

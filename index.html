@@ -422,6 +422,18 @@
         </form>
         <div id="rsvp-message" style="margin-top:1em;color:var(--accent);"></div>
       </section>
+      <!-- Add Pet Profile Section -->
+      <section class="pet-profile-section">
+        <h2>Add Your Pet's Profile</h2>
+        <form id="pet-profile-form" autocomplete="off" onsubmit="return false;" style="display:flex;flex-wrap:wrap;gap:1em;align-items:center;">
+          <input type="text" id="pet-name" placeholder="Pet Name" required style="flex:1 1 120px;">
+          <input type="text" id="pet-type" placeholder="Pet Type (e.g. Dog, Cat)" required style="flex:1 1 120px;">
+          <input type="file" id="pet-photo" accept="image/*" required style="flex:2 1 180px;">
+          <button type="submit" style="flex:1 1 120px;background:var(--secondary);color:#fff;">Add Pet</button>
+        </form>
+        <div id="pet-profile-message" style="margin-top:0.7em;color:var(--accent);"></div>
+        <div id="pet-profiles-list" style="display:flex;flex-wrap:wrap;gap:1.2em;margin-top:1.5em;"></div>
+      </section>
       <section class="location">
         <div class="location-info">
           <h2>Location</h2>
@@ -593,6 +605,40 @@
         if (!locationSearch.contains(e.target) && !locationList.contains(e.target)) {
           locationList.innerHTML = '';
         }
+      });
+      // Pet Profile functionality
+      document.getElementById('pet-profile-form').addEventListener('submit', function() {
+        const name = document.getElementById('pet-name').value.trim();
+        const type = document.getElementById('pet-type').value.trim();
+        const photoInput = document.getElementById('pet-photo');
+        const messageDiv = document.getElementById('pet-profile-message');
+        if (!name || !type || !photoInput.files[0]) {
+          messageDiv.textContent = 'Please fill out all fields and select a photo.';
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const petProfilesList = document.getElementById('pet-profiles-list');
+          const card = document.createElement('div');
+          card.style.background = 'var(--bg)';
+          card.style.border = '1px solid #eee';
+          card.style.borderRadius = '12px';
+          card.style.boxShadow = '0 2px 8px rgba(0,0,0,0.04)';
+          card.style.padding = '1em';
+          card.style.width = '180px';
+          card.style.display = 'flex';
+          card.style.flexDirection = 'column';
+          card.style.alignItems = 'center';
+          card.innerHTML = `
+            <img src="${e.target.result}" alt="${name}" style="width:90px;height:90px;object-fit:cover;border-radius:50%;margin-bottom:0.7em;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            <div style="font-weight:bold;font-size:1.1em;">${name}</div>
+            <div style="color:var(--accent);font-size:0.98em;">${type}</div>
+          `;
+          petProfilesList.appendChild(card);
+          messageDiv.textContent = `Added ${name}'s profile!`;
+          document.getElementById('pet-profile-form').reset();
+        };
+        reader.readAsDataURL(photoInput.files[0]);
       });
     </script>
 </body>
