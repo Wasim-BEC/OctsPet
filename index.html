@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Pals Meetup Landing Page</title>
+  <style>
+    :root {
+      --primary: #ffb347;
+      --secondary: #6ec6ca;
+      --accent: #f67280;
+      --bg: #fff8f0;
+      --text: #333;
+      --radius: 16px;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      padding: 1.2rem 2rem 1.2rem 1rem;
+      text-align: center;
+      border-bottom-left-radius: var(--radius);
+      border-bottom-right-radius: var(--radius);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      object-fit: cover;
+    }
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+    }
+    .header-btn {
+      padding: 0.6em 1.3em;
+      border-radius: 8px;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: bold;
+      background: #fff;
+      color: var(--accent);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .header-btn.primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .header-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+    .hero-img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: var(--radius);
+      margin: 1rem auto;
+      display: block;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    h1 {
+      margin: 0.2em 0 0.1em 0;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    .tagline {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 0.5em;
+    }
+    .event-meta {
+      font-size: 1.1rem;
+      margin: 0.5em 0 0 0;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      padding: 2rem 1.5rem;
+    }
+    section {
+      margin-bottom: 2.5rem;
+    }
+    .features-list, .amenities-list, .activities-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      list-style: none;
+      padding: 0;
+      margin: 1em 0 0 0;
+    }
+    .features-list li, .amenities-list li, .activities-list li {
+      background: var(--secondary);
+      color: #fff;
+      padding: 0.7em 1.2em;
+      border-radius: 999px;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .cta {
+      text-align: center;
+      margin: 2em 0 1em 0;
+    }
+    .cta input, .cta button {
+      font-size: 1.1rem;
+      padding: 0.7em 1em;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin: 0.3em;
+    }
+    .cta button {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .cta button:hover {
+      background: #c94f60;
+    }
+    .location {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+    .location-info {
+      flex: 1 1 220px;
+    }
+    .map {
+      flex: 2 1 320px;
+      min-width: 250px;
+      min-height: 200px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1em;
+    }
+    .gallery img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .testimonial {
+      background: var(--secondary);
+      color: #fff;
+      border-radius: 12px;
+      padding: 1em;
+      margin: 0.5em 0;
+      font-style: italic;
+    }
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+    .contact-form {
+      flex: 2 1 300px;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      margin-bottom: 0.7em;
+      padding: 0.7em;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .contact-form button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.7em 1.2em;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .contact-form button:hover {
+      background: #e09e3e;
+    }
+    .social {
+      flex: 1 1 120px;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      align-items: flex-start;
+      margin-top: 1em;
+    }
+    .social a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: color 0.2s;
+    }
+    .social a:hover {
+      color: #c94f60;
+    }
+    .search-section {
+      text-align: center;
+      margin: 2rem 0 2rem 0;
+    }
+    #location-search {
+      width: 90%;
+      max-width: 400px;
+      padding: 0.7em 1em;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1.1rem;
+      margin-bottom: 1em;
+    }
+    .location-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 400px;
+      text-align: left;
+    }
+    .location-list li {
+      background: var(--secondary);
+      color: #fff;
+      padding: 0.7em 1em;
+      border-radius: 8px;
+      margin-bottom: 0.5em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .location-list li:hover {
+      background: var(--accent);
+    }
+    .auth-section {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .auth-modal {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+      padding: 2rem 2.5rem 1.5rem 2.5rem;
+      min-width: 320px;
+      max-width: 95vw;
+      position: relative;
+      animation: fadeIn 0.2s;
+    }
+    .close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--accent);
+      cursor: pointer;
+    }
+    #auth-tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      justify-content: center;
+    }
+    .auth-tab {
+      background: #eee;
+      border: none;
+      border-radius: 8px 8px 0 0;
+      padding: 0.6em 1.5em;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: bold;
+      transition: background 0.2s, color 0.2s;
+    }
+    .auth-tab.active {
+      background: var(--accent);
+      color: #fff;
+    }
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7em;
+      margin-bottom: 0.5em;
+    }
+    .auth-form input {
+      padding: 0.7em 1em;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .auth-form button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.7em 1.2em;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .auth-form button:hover {
+      background: #e09e3e;
+    }
+    .auth-message {
+      color: var(--accent);
+      min-height: 1.2em;
+      font-size: 1rem;
+      margin-top: 0.2em;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 700px) {
+      main {
+        padding: 1rem 0.3rem;
+      }
+      .location, .contact {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .gallery {
+        justify-content: center;
+      }
+      .main-header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 0.5rem;
+      }
+      .logo-title h1 {
+        font-size: 2rem;
+      }
+      .auth-modal {
+        padding: 1rem 0.5rem;
+        min-width: 90vw;
+      }
+    }
+  </style>
+</head>
+<body>
+    <header class="main-header">
+      <div class="logo-title">
+        <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Pet Pals Logo" class="logo">
+        <div>
+          <h1>Pet Pals Meetup</h1>
+          <div class="tagline">Where pets and people make friends!</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="login-btn" class="header-btn">Login</button>
+        <button id="signup-btn" class="header-btn primary">Sign Up</button>
+      </div>
+    </header>
+    <main>
+      <section class="search-section">
+        <h2>Find a Meetup Location</h2>
+        <input type="text" id="location-search" placeholder="Search locations..." autocomplete="off">
+        <ul id="location-list" class="location-list"></ul>
+      </section>
+      <section class="hero-section">
+        <img class="hero-img" src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=800&q=80" alt="Pets and people having fun">
+        <div class="event-meta">
+          <strong>Date:</strong> July 20, 2025 &nbsp; | &nbsp;
+          <strong>Time:</strong> 10:00 AM – 1:00 PM &nbsp; | &nbsp;
+          <strong>Location:</strong> Sunny Paws Park, 123 Pet Lane
+        </div>
+      </section>
+      <section>
+        <h2>About the Event</h2>
+        <p>Join us for a fun-filled morning at Sunny Paws Park! Meet fellow pet lovers, let your furry friends play, and enjoy a variety of activities and treats. All pets and families welcome!</p>
+        <ul class="amenities-list">
+          <li>Water bowls</li>
+          <li>Treat stations</li>
+          <li>Shaded play areas</li>
+          <li>Pet waste bags</li>
+        </ul>
+        <ul class="activities-list">
+          <li>Group walk</li>
+          <li>Pet costume contest</li>
+          <li>Agility playtime</li>
+          <li>Photo booth</li>
+        </ul>
+      </section>
+      <section class="cta">
+        <h2>RSVP Now</h2>
+        <form id="rsvp-form" autocomplete="off" onsubmit="return false;">
+          <input type="text" id="rsvp-name" placeholder="Your Name" required>
+          <input type="email" id="rsvp-email" placeholder="Your Email" required>
+          <button type="submit">Join the Meetup!</button>
+        </form>
+        <div id="rsvp-message" style="margin-top:1em;color:var(--accent);"></div>
+      </section>
+      <section class="location">
+        <div class="location-info">
+          <h2>Location</h2>
+          <p><strong>Sunny Paws Park</strong><br>123 Pet Lane, Petville</p>
+          <p>Easy parking, fenced play areas, and lots of shade!</p>
+        </div>
+        <div class="map">
+          <iframe src="https://www.google.com/maps?q=Central+Park,+New+York,+NY&output=embed" width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </section>
+      <section>
+        <h2>Photo Gallery</h2>
+        <div class="gallery">
+          <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=400&q=80" alt="Happy dog">
+          <img src="https://images.unsplash.com/photo-1518715308788-3005759c41c8?auto=format&fit=crop&w=400&q=80" alt="Cat and owner">
+          <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Pets playing">
+          <img src="https://images.unsplash.com/photo-1518715308788-3005759c41c8?auto=format&fit=crop&w=400&q=80" alt="Pet meetup">
+        </div>
+        <div class="testimonial">“My dog Max had the best time! We met so many new friends. Can’t wait for the next one!” – Sarah P.</div>
+        <div class="testimonial">“Loved the costume contest and the friendly atmosphere. Highly recommend!” – Alex R.</div>
+      </section>
+      <section class="contact">
+        <div class="contact-form">
+          <h2>Contact Us</h2>
+          <form id="contact-form" autocomplete="off" onsubmit="return false;">
+            <input type="text" id="contact-name" placeholder="Your Name" required>
+            <input type="email" id="contact-email" placeholder="Your Email" required>
+            <textarea id="contact-message" rows="3" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+          <div id="contact-message-status" style="margin-top:1em;color:var(--accent);"></div>
+        </div>
+        <div class="social">
+          <h3>Follow Us</h3>
+          <a href="#" title="Instagram"><span>🐾</span> Instagram</a>
+          <a href="#" title="Facebook"><span>📘</span> Facebook</a>
+          <a href="#" title="Twitter"><span>🐦</span> Twitter</a>
+        </div>
+      </section>
+      <section class="auth-section" id="auth-section" style="display:none;">
+        <div class="auth-modal" id="auth-modal">
+          <button class="close-modal" id="close-auth">×</button>
+          <div id="auth-tabs">
+            <button id="tab-login" class="auth-tab active">Login</button>
+            <button id="tab-signup" class="auth-tab">Sign Up</button>
+          </div>
+          <form id="login-form" class="auth-form">
+            <h3>Login</h3>
+            <input type="email" id="login-email" placeholder="Email" required>
+            <input type="password" id="login-password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <div class="auth-message" id="login-message"></div>
+          </form>
+          <form id="signup-form" class="auth-form" style="display:none;">
+            <h3>Sign Up</h3>
+            <input type="text" id="signup-name" placeholder="Name" required>
+            <input type="email" id="signup-email" placeholder="Email" required>
+            <input type="password" id="signup-password" placeholder="Password" required>
+            <button type="submit">Sign Up</button>
+            <div class="auth-message" id="signup-message"></div>
+          </form>
+        </div>
+      </section>
+    </main>
+    <script>
+      // RSVP form fake submission
+      document.getElementById('rsvp-form').addEventListener('submit', function() {
+        var name = document.getElementById('rsvp-name').value.trim();
+        var email = document.getElementById('rsvp-email').value.trim();
+        if(name && email) {
+          document.getElementById('rsvp-message').textContent = `Thank you, ${name}! Your RSVP has been received.`;
+          document.getElementById('rsvp-form').reset();
+        }
+      });
+      // Contact form fake submission
+      document.getElementById('contact-form').addEventListener('submit', function() {
+        var name = document.getElementById('contact-name').value.trim();
+        var email = document.getElementById('contact-email').value.trim();
+        var msg = document.getElementById('contact-message').value.trim();
+        if(name && email && msg) {
+          document.getElementById('contact-message-status').textContent = `Thank you, ${name}! We'll get back to you soon.`;
+          document.getElementById('contact-form').reset();
+        }
+      });
+      // Header Auth Modal Logic
+      const authSection = document.getElementById('auth-section');
+      const loginBtn = document.getElementById('login-btn');
+      const signupBtn = document.getElementById('signup-btn');
+      const closeAuth = document.getElementById('close-auth');
+      const tabLogin = document.getElementById('tab-login');
+      const tabSignup = document.getElementById('tab-signup');
+      const loginForm = document.getElementById('login-form');
+      const signupForm = document.getElementById('signup-form');
+      const loginMessage = document.getElementById('login-message');
+      const signupMessage = document.getElementById('signup-message');
+      // Show modal
+      loginBtn.onclick = () => {
+        authSection.style.display = 'flex';
+        tabLogin.classList.add('active');
+        tabSignup.classList.remove('active');
+        loginForm.style.display = '';
+        signupForm.style.display = 'none';
+      };
+      signupBtn.onclick = () => {
+        authSection.style.display = 'flex';
+        tabSignup.classList.add('active');
+        tabLogin.classList.remove('active');
+        signupForm.style.display = '';
+        loginForm.style.display = 'none';
+      };
+      closeAuth.onclick = () => { authSection.style.display = 'none'; };
+      tabLogin.onclick = () => {
+        tabLogin.classList.add('active');
+        tabSignup.classList.remove('active');
+        loginForm.style.display = '';
+        signupForm.style.display = 'none';
+      };
+      tabSignup.onclick = () => {
+        tabSignup.classList.add('active');
+        tabLogin.classList.remove('active');
+        signupForm.style.display = '';
+        loginForm.style.display = 'none';
+      };
+      // Fake login/signup
+      loginForm.onsubmit = function(e) {
+        e.preventDefault();
+        loginMessage.textContent = 'Welcome back! (Demo only)';
+        setTimeout(()=>{authSection.style.display='none';}, 1200);
+      };
+      signupForm.onsubmit = function(e) {
+        e.preventDefault();
+        signupMessage.textContent = 'Signup successful! (Demo only)';
+        setTimeout(()=>{authSection.style.display='none';}, 1200);
+      };
+      // Location Search
+      const locations = [
+        {name: 'Sunny Paws Park', address: '123 Pet Lane, Petville'},
+        {name: 'Happy Tails Field', address: '456 Woof Ave, Barktown'},
+        {name: 'Furry Friends Plaza', address: '789 Meow St, Cat City'},
+        {name: 'Central Park', address: 'Central Park, New York, NY'},
+        {name: 'Puppy Playland', address: '321 Doggo Rd, Pawsville'}
+      ];
+      const locationSearch = document.getElementById('location-search');
+      const locationList = document.getElementById('location-list');
+      function renderLocations(filter) {
+        locationList.innerHTML = '';
+        locations.filter(l =>
+          l.name.toLowerCase().includes(filter.toLowerCase()) ||
+          l.address.toLowerCase().includes(filter.toLowerCase())
+        ).forEach(l => {
+          const li = document.createElement('li');
+          li.textContent = `${l.name} – ${l.address}`;
+          li.onclick = () => {
+            document.querySelector('.event-meta').innerHTML = `<strong>Date:</strong> July 20, 2025 &nbsp; | &nbsp; <strong>Time:</strong> 10:00 AM – 1:00 PM &nbsp; | &nbsp; <strong>Location:</strong> ${l.name}, ${l.address}`;
+            document.querySelector('.map iframe').src = `https://www.google.com/maps?q=${encodeURIComponent(l.address)}&output=embed`;
+            locationList.innerHTML = '';
+            locationSearch.value = l.name;
+          };
+          locationList.appendChild(li);
+        });
+      }
+      locationSearch.addEventListener('input', function() {
+        renderLocations(this.value);
+      });
+      locationSearch.addEventListener('focus', function() {
+        renderLocations(this.value);
+      });
+      document.body.addEventListener('click', function(e) {
+        if (!locationSearch.contains(e.target) && !locationList.contains(e.target)) {
+          locationList.innerHTML = '';
+        }
+      });
+    </script>
+</body>
+</html>
